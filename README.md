@@ -32,4 +32,4 @@ php app.php redirects:create https://dvk.co --key=dvk
 
 If the `--key` argument is omitted, a key will be generated based on the target URL. If the target URL is missing a protocol, `http` is assumed.
 
-![http://g.recordit.co/gPIm1tgt4l.gif](http://g.recordit.co/gPIm1tgt4l.gif)
+![http://g.recordit.co/adB7YRtdb5.gif](http://g.recordit.co/adB7YRtdb5.gif)
