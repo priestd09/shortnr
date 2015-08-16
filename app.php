@@ -13,7 +13,8 @@ use League\Flysystem\Filesystem;
 // todo: move to DI container?
 $adapter = new Local(__DIR__ . '/redirects');
 $filesystem = new Filesystem($adapter);
+$config = include __DIR__ . '/config.php';
 
 $application = new Application();
-$application->add(new CreateCommand($filesystem));
+$application->add(new CreateCommand($filesystem, $config));
 $application->run();
