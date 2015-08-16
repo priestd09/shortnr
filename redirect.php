@@ -15,11 +15,14 @@ $request = Request::createFromGlobals();
 
 // trim base dir from request url (when running from subdir)
 $basePath = '/' . Url::createFromUrl($config['url'])->getPath();
-$key = ltrim( $request->getRequestUri(), $basePath );
+$key = ltrim($request->getRequestUri(), $basePath);
+$key = preg_replace('/[^\w-]/', '', $key);
 
 // bail if no key given
 if( empty( $key ) ) {
-	return new Response( 'Nothing here, move along.', 404 );
+	$response = new Response( 'Nothing here, move along.', 404 );
+	$response->send();
+	exit;
 }
 
 // todo: allow using different storages, like dropbox to manage redirects.
