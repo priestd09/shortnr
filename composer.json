@@ -1,0 +1,21 @@
+{
+    "name": "dvk/shortnr",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Danny van Kooten",
+            "email": "hi@dvk.co"
+        }
+    ],
+    "require": {
+        "league/flysystem": "^1.0",
+        "symfony/http-kernel": "^2.7",
+        "symfony/console": "^2.7",
+        "league/container": "^1.3"
+    },
+    "autoload": {
+      "psr-4": {
+        "Shortnr\\": [ "src/" ]
+      }
+    }
+}
