@@ -13,6 +13,10 @@ use League\Flysystem\Filesystem;
 // todo: move to DI container?
 $adapter = new Local(__DIR__ . '/redirects');
 $filesystem = new Filesystem($adapter);
+
+// load config file (with .env support)
+$dotenv = new Dotenv\Dotenv(__DIR__);
+$dotenv->load();
 $config = include __DIR__ . '/config.php';
 
 $application = new Application();
