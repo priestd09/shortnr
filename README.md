@@ -16,7 +16,6 @@ php app.php redirects:create https://dvk.co --key=dvk
 If the `--key` argument is omitted, a key will be generated based on the target URL. If the target URL is missing a protocol, `http` is assumed.
 
 ```
-```bash
 $php app.php redirects:create google.com
 Scheme of target URL missing, assuming "http".
 Success! Redirect to http://google.com/ created at http://shortnr.com/gglcm.
