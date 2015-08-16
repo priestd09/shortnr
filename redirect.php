@@ -1,5 +1,6 @@
 <?php
 
+use League\Flysystem\FileNotFoundException;
 use League\Flysystem\Filesystem;
 use League\Flysystem\Adapter\Local;
 use League\Url\Url;
@@ -25,12 +26,11 @@ if( empty( $key ) ) {
 $adapter = new Local(__DIR__ . '/redirects');
 $filesystem = new Filesystem($adapter);
 
-// got a redirect file?
-if( $filesystem->has( $key ) ) {
+try {
 	// todo: maybe read lines. First line is redirect URL, second line is number of hits.
 	$url = $filesystem->read( $key );
 	$response = new RedirectResponse( $url, 302 );
-} else {
+} catch( FileNotFoundException $exception ) {
 	// no redirect exists with that key
 	$response = new Response( 'Nothing here, move along please.', 404 );
 }
