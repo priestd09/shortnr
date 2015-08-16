@@ -1,24 +1,17 @@
 #!/usr/bin/env php
 <?php
 // application.php
-
 require __DIR__.'/vendor/autoload.php';
 
 use Shortnr\Command\Redirect\CreateCommand;
+use Shortnr\ShortnrServiceProvider;
 use Symfony\Component\Console\Application;
-use League\Flysystem\Adapter\Local;
-use League\Flysystem\Filesystem;
 
-// create instance dependency for commands
-// todo: move to DI container?
-$adapter = new Local(__DIR__ . '/redirects');
-$filesystem = new Filesystem($adapter);
-
-// load config file (with .env support)
-$dotenv = new Dotenv\Dotenv(__DIR__);
-$dotenv->load();
-$config = include __DIR__ . '/config.php';
+// register dependencies
+$container = new League\Container\Container;
+$container->add('app_dir', __DIR__);
+$container->addServiceProvider(new ShortnrServiceProvider());
 
 $application = new Application();
-$application->add(new CreateCommand($filesystem, $config));
+$application->add(new CreateCommand($container->get('filesystem'), $container->get('config')));
 $application->run();

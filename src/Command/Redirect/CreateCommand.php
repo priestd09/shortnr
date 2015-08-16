@@ -75,10 +75,12 @@ class CreateCommand extends Command
 			);
 		}
 
+		$url_string = (string) $url;
+
 		// create redirect file
-		$this->filesystem->put($key,$url);
+		$this->filesystem->put($key,$url_string);
 
 		// output feedback
-		$output->writeln(sprintf( "<info>Success! Redirect to %s created at %s.</info>", $url, $this->config['url'] . $key));
+		$output->writeln(sprintf( "<info>Success! Redirect to %s created at %s.</info>", (string) $url_string, $this->config['url'] . $key));
 	}
 }

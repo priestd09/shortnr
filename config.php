@@ -2,13 +2,16 @@
 
 $config = [
 	'url' => 'http://shortnr.com/',
-	'storage' => 'local', // this isn't actually working yet
+	'storage' => 'dropbox', // choose between "local" or "dropbox"
 
+	'local' => [
+		'dir' => __DIR__
+	],
+	
 	'dropbox' => [
 		'access_token' => getenv('DROPBOX_ACCESS_TOKEN'),
 		'app_secret' => getenv('DROPBOX_APP_SECRET')
 	]
-
 ];
 
 return $config;

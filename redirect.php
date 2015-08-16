@@ -1,16 +1,21 @@
 <?php
 
 use League\Flysystem\FileNotFoundException;
-use League\Flysystem\Filesystem;
-use League\Flysystem\Adapter\Local;
 use League\Url\Url;
+use Shortnr\ShortnrServiceProvider;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 // bootstrap
 require __DIR__ . '/vendor/autoload.php';
-$config = include __DIR__ . '/config.php';
+
+// register dependencies
+$container = new League\Container\Container;
+$container->add('app_dir', __DIR__);
+$container->addServiceProvider(new ShortnrServiceProvider());
+
+// create request object
 $request = Request::createFromGlobals();
 
 // trim base dir from request url (when running from subdir)
@@ -25,9 +30,7 @@ if( empty( $key ) ) {
 	exit;
 }
 
-// todo: allow using different storages, like dropbox to manage redirects.
-$adapter = new Local(__DIR__ . '/redirects');
-$filesystem = new Filesystem($adapter);
+$filesystem = $container->get('filesystem');
 
 try {
 	// todo: maybe read lines. First line is redirect URL, second line is number of hits.
