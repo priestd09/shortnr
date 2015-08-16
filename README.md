@@ -13,26 +13,23 @@ _Please be warned that this is very much a work in progress. No stable version h
 
 _Apache_
 
-```
+```apache
 RewriteEngine on
 RewriteRule . redirect.php [L]
 ```
 
 _Nginx_
-```
+
+```nginx
 try_files $uri /redirect.php;
 ```
 
 4. Run the following from the command line to create a redirect.
 
-```
+```sh
 php app.php redirects:create https://dvk.co --key=dvk
 ```
 
 If the `--key` argument is omitted, a key will be generated based on the target URL. If the target URL is missing a protocol, `http` is assumed.
 
-```
-$ php app.php redirects:create google.com
-Scheme of target URL missing, assuming "http".
-Success! Redirect to http://google.com/ created at http://shortnr.com/gglcm.
-```
+![http://g.recordit.co/gPIm1tgt4l.gif](http://g.recordit.co/gPIm1tgt4l.gif)
